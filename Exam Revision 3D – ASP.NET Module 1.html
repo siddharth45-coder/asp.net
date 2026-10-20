@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Exam Revision 3D – ASP.NET Module 1</title>
+<style>
+:root{--b1:#07090d;--b2:#131a26;--cd:rgba(14,18,26,.82);--tx:#eef2f7;--mu:#98a3b5;--a:#1c69d4;--a2:#e7222e;--bd:rgba(129,196,255,.28);--ok:#3ddc84;--cb:#0f172a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--b1:#07090d;--b2:#131a26;--cd:rgba(14,18,26,.82);--tx:#eef2f7;--mu:#98a3b5;--a:#1c69d4;--a2:#e7222e;--bd:rgba(129,196,255,.28);--ok:#3ddc84}}
+:root[data-theme="dark"]{--b1:#07090d;--b2:#131a26;--cd:rgba(14,18,26,.82);--tx:#eef2f7;--mu:#98a3b5;--a:#1c69d4;--a2:#e7222e;--bd:rgba(129,196,255,.28);--ok:#3ddc84}
+*{box-sizing:border-box}html,body{margin:0}body{min-height:100vh;color:var(--tx);font:16px/1.55 system-ui,sans-serif;background:linear-gradient(135deg,var(--b1),var(--b2));background-attachment:fixed;overflow-x:hidden}
+.bgc{position:fixed;border-radius:18px;background:linear-gradient(135deg,var(--a),var(--a2));opacity:.18;animation:fl 12s ease-in-out infinite;pointer-events:none}
+@keyframes fl{0%,100%{transform:translateY(0) rotateX(0) rotateY(0)}50%{transform:translateY(-40px) rotateX(180deg) rotateY(200deg)}}
+.w{max-width:780px;margin:auto;padding:14px;position:relative}
+h1{font-size:19px;margin:4px 0;background:linear-gradient(90deg,var(--a),var(--a2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.top{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+select{background:var(--cd);color:var(--tx);border:1px solid var(--bd);border-radius:10px;padding:8px;max-width:100%;font-size:13px}
+.bar{height:8px;background:var(--bd);border-radius:9px;margin:10px 0 4px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--a),var(--a2));transition:.4s}
+.sub{color:var(--mu);font-size:12px}
+.stage{perspective:1400px;margin:14px 0}
+.tilt{transform-style:preserve-3d;transition:transform .15s ease-out;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.card{background:var(--cd);backdrop-filter:blur(14px);border:1px solid var(--bd);border-radius:22px;padding:18px;box-shadow:0 30px 60px -20px rgba(80,50,200,.45),0 0 0 1px rgba(255,255,255,.05) inset;transform-style:preserve-3d;min-height:360px}
+.card.oL{animation:oL .28s forwards}.card.oR{animation:oR .28s forwards}.card.iR{animation:iR .45s cubic-bezier(.2,.9,.3,1.2)}.card.iL{animation:iL .45s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes oL{to{opacity:0;transform:translateX(-80px) rotateY(-65deg) scale(.9)}}@keyframes oR{to{opacity:0;transform:translateX(80px) rotateY(65deg) scale(.9)}}
+@keyframes iR{from{opacity:0;transform:translateX(90px) rotateY(70deg) scale(.9)}}@keyframes iL{from{opacity:0;transform:translateX(-90px) rotateY(-70deg) scale(.9)}}
+.qh{display:flex;gap:12px;align-items:flex-start;font-weight:700;font-size:18px;transform:translateZ(40px)}
+.n{background:linear-gradient(135deg,var(--a),var(--a2));color:#fff;border-radius:12px;min-width:42px;height:42px;display:grid;place-items:center;box-shadow:0 8px 18px -4px var(--a)}
+.tabs{display:flex;gap:6px;margin:14px 0;transform:translateZ(25px)}.tabs button{flex:1;background:transparent;color:var(--mu);border:1px solid var(--bd);border-radius:12px;padding:8px 4px;font-size:13px;font-weight:600;cursor:pointer}.tabs button.on{background:linear-gradient(135deg,var(--a),var(--a2));color:#fff;border-color:transparent;box-shadow:0 8px 16px -6px var(--a)}
+.tl{border-left:4px solid var(--a2);background:linear-gradient(90deg,rgba(255,95,162,.14),transparent);padding:10px 12px;border-radius:8px;transform:translateZ(20px)}
+ul{padding-left:20px;margin:10px 0}li{margin:5px 0}li::marker{color:var(--a2)}
+.mn{margin-top:12px;padding:10px;border-radius:12px;border:1px dashed var(--a);font-size:14px}
+.fl{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:8px 0}.fl span{background:linear-gradient(135deg,var(--a),var(--a2));color:#fff;border-radius:12px;padding:8px 12px;font-size:13px;font-weight:600;box-shadow:0 10px 18px -8px var(--a),0 3px 0 rgba(0,0,0,.25);animation:pop .5s both;animation-delay:calc(var(--k)*90ms)}.fl b{color:var(--a2);font-size:18px}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.7) rotateX(60deg)}}
+.ly{perspective:600px;margin:8px 0}.ly div{margin:6px auto;padding:10px;text-align:center;font-size:13px;font-weight:600;color:#fff;border-radius:10px;transform:rotateX(18deg);box-shadow:0 8px 0 rgba(0,0,0,.2),0 14px 20px -8px var(--a);animation:pop .5s both;animation-delay:calc(var(--k)*100ms)}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:14px;display:block;overflow-x:auto;margin:8px 0}td,th{border-bottom:1px solid var(--bd);padding:8px;text-align:left}th{background:linear-gradient(135deg,var(--a),var(--a2));color:#fff}
+pre{background:var(--cb);color:#e2e8f0;padding:12px;border-radius:12px;overflow-x:auto;font-size:13px;margin:8px 0;border:1px solid var(--bd)}
+h4{margin:14px 0 2px;color:var(--a2);font-size:15px}.fa p{margin:2px 0}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:6px}
+.pv{width:48px;height:48px;border-radius:50%;border:1px solid var(--bd);background:var(--cd);color:var(--tx);font-size:20px;cursor:pointer}
+.rv{background:transparent;border:1.5px solid var(--ok);color:var(--ok);border-radius:999px;padding:10px 14px;font-weight:700;font-size:13px;cursor:pointer}.rv.on{background:var(--ok);color:#fff}
+.nx{position:relative;border:0;padding:3px;border-radius:999px;background:none;cursor:pointer;overflow:hidden;isolation:isolate;transition:transform .15s}
+.nx::before{content:"";position:absolute;inset:-80%;background:conic-gradient(var(--a),var(--a2),#81c4ff,var(--a));animation:sp 2.2s linear infinite;z-index:-1}
+@keyframes sp{to{transform:rotate(360deg)}}
+.nx .in{display:flex;align-items:center;gap:12px;background:#0d0b24;color:#fff;padding:9px 9px 9px 22px;border-radius:999px;font-weight:800;letter-spacing:3px;font-size:14px}
+.nx i{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--a),var(--a2));display:grid;place-items:center;font-style:normal;transition:transform .3s;animation:nd 1.4s ease-in-out infinite}
+@keyframes nd{50%{transform:translateX(5px)}}
+.nx:hover i{transform:scale(1.2) rotate(-15deg)}.nx:active{transform:scale(.92)}.nx:disabled{opacity:.4}
+
+body{background:radial-gradient(ellipse at 50% 100%,#1b2a45 0,transparent 65%),repeating-linear-gradient(45deg,#0b0e14 0 4px,#10151e 4px 8px),#07090d;background-attachment:fixed}
+.w{z-index:1}h1{font-style:italic;text-transform:uppercase;letter-spacing:2px;font-weight:900}
+.ms{height:5px;margin-top:6px;background:linear-gradient(90deg,#81c4ff 33%,#0066b1 33% 66%,#e7222e 66%)}
+.card{border-radius:6px;border-left:5px solid var(--a2);box-shadow:0 30px 60px -20px #000,0 0 0 1px rgba(255,255,255,.04) inset}
+.n{border-radius:4px;transform:skewX(-10deg)}.qh{text-transform:uppercase;letter-spacing:.5px;font-size:17px}
+.tabs button{border-radius:4px;text-transform:uppercase;letter-spacing:1px;font-size:12px}.tabs button.on{background:linear-gradient(135deg,var(--a),#0a3d8f)}
+.fl span,.ly div{border-radius:4px}.tl{border-left-color:var(--a)}h4{color:#81c4ff;text-transform:uppercase;letter-spacing:1px}
+.pv,.rv{border-radius:4px}.pv{width:46px;height:46px}.nx,.nx .in{border-radius:6px}.nx i{border-radius:4px}
+.car{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.hlp{fill:#262f3d;transition:.3s}.car.on .hlp{fill:#f2faff;filter:drop-shadow(0 0 12px #bfe3ff) drop-shadow(0 0 34px #7cc4ff)}
+.halo{opacity:0;transition:.4s}.car.on .halo{opacity:1}.drl{stroke:#55627a}.car.on .drl{stroke:#fff}
+.ind{fill:#3b2e0c}.car.bl .indl,.car.br .indr{animation:bk .8s steps(1) infinite}
+@keyframes bk{0%{fill:#ffb000;filter:drop-shadow(0 0 12px #ffb000)}50%{fill:#3b2e0c;filter:none}}
+.hud{position:fixed;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:5;display:flex;gap:6px}
+.hud button{background:rgba(8,11,17,.85);color:#fff;border:1px solid var(--bd);border-radius:4px;padding:8px 10px;font-weight:800;font-size:12px;letter-spacing:1px;cursor:pointer}
+.hud button.on{border-color:#ffb000;color:#ffb000}
+.cv{transition:opacity .3s;opacity:1}.car.on .cv{opacity:0}
+.bwg{opacity:0;mix-blend-mode:screen;transition:opacity .3s}.car.on .bwg{opacity:.9}
+.amg{opacity:0;mix-blend-mode:screen}.car.bl .amL,.car.br .amR{animation:bk2 .8s steps(1) infinite}
+@keyframes bk2{0%{opacity:1}50%{opacity:0}}
+body{background:radial-gradient(ellipse at 50% 100%,#14233d 0,transparent 65%),linear-gradient(rgba(129,196,255,.05) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,rgba(129,196,255,.05) 1px,transparent 1px) 0 0/40px 40px,#07090d;background-attachment:fixed}
+.bgp{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.55}
+.nl{fill:#81c4ff;font:700 12px monospace;letter-spacing:1px}.tk{fill:#81c4ff;opacity:.13;font:800 44px monospace;animation:fy 9s ease-in-out infinite}
+@keyframes fy{50%{transform:translateY(-22px)}}
+.bgp{opacity:.85}.bn{animation:sw .5s both}@keyframes sw{from{opacity:0;transform:translateY(8px)}}.nd{animation:gl 5s ease-in-out infinite}@keyframes gl{50%{stroke:#81c4ff;filter:drop-shadow(0 0 8px #1c69d4)}}
+.bgp>*:not(.tk){display:none}
+.wf{margin-top:16px;background:var(--cd);backdrop-filter:blur(12px);border:1px solid var(--bd);border-left:5px solid var(--a);border-radius:6px;padding:12px}
+.wh{display:flex;justify-content:space-between;align-items:center;gap:8px;font:700 11px monospace;letter-spacing:1px;color:#81c4ff}
+.wh button{background:linear-gradient(135deg,var(--a),var(--a2));color:#fff;border:0;border-radius:4px;padding:7px 12px;font:800 11px monospace;letter-spacing:1px;cursor:pointer}
+.ws{display:flex;align-items:center;gap:4px;margin:12px 0;overflow-x:auto;padding:6px 0}
+.st{flex:1;min-width:70px;background:#0b1220;border:1.5px solid var(--a);color:var(--tx);border-radius:4px;padding:9px 4px;font:700 11px monospace;cursor:pointer;transition:.25s}
+.st.vis{border-color:#81c4ff}.st.on{background:linear-gradient(135deg,var(--a),var(--a2));border-color:transparent;transform:translateY(-4px) scale(1.07);box-shadow:0 10px 18px -6px var(--a)}
+.ar{color:var(--a2);font-weight:900;animation:nd 1.4s ease-in-out infinite}
+.wi{border-left:4px solid var(--a2);padding:10px 12px;background:linear-gradient(90deg,rgba(231,34,46,.14),transparent);border-radius:4px;font-size:14px;animation:pop .4s both}
+.wi b{display:block;color:#81c4ff;font:800 10px monospace;letter-spacing:1.5px;margin-top:8px}.wi b:first-child{margin-top:0}
+</style></head><body><svg class="bgp" viewBox="0 0 800 600" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><text class="tk" x="60" y="150" style="animation-delay:0s">{ }</text><text class="tk" x="600" y="110" style="animation-delay:-3s">&lt;/&gt;</text><text class="tk" x="380" y="260" style="animation-delay:-5s">C#</text><text class="tk" x="90" y="380" style="animation-delay:-7s">0101</text><text class="tk" x="620" y="330" style="animation-delay:-2s">.NET</text><text x="400" y="505" text-anchor="middle" id="bcap" class="nl" style="opacity:.7">WORKFLOW</text><circle r="5" fill="#81c4ff"><animateMotion dur="6s" begin="0s" repeatCount="indefinite" path="M95 539 L745 539"/></circle><circle r="5" fill="#e7222e"><animateMotion dur="6s" begin="3s" repeatCount="indefinite" path="M745 549 L95 549"/></circle><circle r="5" fill="#81c4ff"><animateMotion dur="6s" begin="2s" repeatCount="indefinite" path="M95 539 L745 539"/></circle><circle r="5" fill="#e7222e"><animateMotion dur="6s" begin="5s" repeatCount="indefinite" path="M745 549 L95 549"/></circle><circle r="5" fill="#81c4ff"><animateMotion dur="6s" begin="4s" repeatCount="indefinite" path="M95 539 L745 539"/></circle><circle r="5" fill="#e7222e"><animateMotion dur="6s" begin="7s" repeatCount="indefinite" path="M745 549 L95 549"/></circle><rect class="nd" style="animation-delay:0.0s" x="40" y="520" width="110" height="38" rx="4" fill="#0b1220" stroke="#1c69d4" stroke-width="1.5"/><text x="95" y="544" text-anchor="middle" class="nl bn">Browser</text><path d="M150 539 L190 539" stroke="#1c69d4" stroke-width="2" stroke-dasharray="4 4"/><rect class="nd" style="animation-delay:0.9s" x="190" y="520" width="110" height="38" rx="4" fill="#0b1220" stroke="#1c69d4" stroke-width="1.5"/><text x="245" y="544" text-anchor="middle" class="nl bn">Kestrel</text><path d="M300 539 L340 539" stroke="#1c69d4" stroke-width="2" stroke-dasharray="4 4"/><rect class="nd" style="animation-delay:1.8s" x="340" y="520" width="110" height="38" rx="4" fill="#0b1220" stroke="#1c69d4" stroke-width="1.5"/><text x="395" y="544" text-anchor="middle" class="nl bn">Middleware</text><path d="M450 539 L490 539" stroke="#1c69d4" stroke-width="2" stroke-dasharray="4 4"/><rect class="nd" style="animation-delay:2.7s" x="490" y="520" width="110" height="38" rx="4" fill="#0b1220" stroke="#1c69d4" stroke-width="1.5"/><text x="545" y="544" text-anchor="middle" class="nl bn">Controller</text><path d="M600 539 L640 539" stroke="#1c69d4" stroke-width="2" stroke-dasharray="4 4"/><rect class="nd" style="animation-delay:3.6s" x="640" y="520" width="110" height="38" rx="4" fill="#0b1220" stroke="#1c69d4" stroke-width="1.5"/><text x="695" y="544" text-anchor="middle" class="nl bn">Database</text></svg>
+<div class="w">
+<div class="top"><h1>ASP.NET · Module 1</h1><select id="j"></select></div>
+<div class="ms"></div><div class="bar"><i id="pb"></i></div><div class="sub" id="pt"></div>
+<div class="stage"><div class="tilt" id="tl"><div class="card" id="c"></div></div></div>
+<div class="row"><button class="pv" id="pv" aria-label="Previous">‹</button><button class="rv" id="rv">✓ Revised</button><button class="nx" id="nx"><span class="in">NEXT<i>➜</i></span></button></div>
+<div class="wf"><div class="wh"><span>⚙ INTERACTIVE WORKFLOW · TAP A STEP</span><button id="wp">▶ PLAY</button></div><div class="ws" id="ws"></div><div class="wi" id="wi"></div></div>
+<div class="sub" style="text-align:center;margin-top:10px">Tip: swipe or use ← → keys · drag over the card to tilt it</div>
+</div>
+<script>
+const D=[
+{q:"Differentiate Client-Side and Server-Side Scripting",t:"Client-side runs in the browser; server-side runs on the web server and sends back plain HTML.",tb:[["Point","Client-Side","Server-Side"],["Runs on","Browser","Web server"],["Languages","JavaScript, HTML, CSS","C#, PHP, Java, Python"],["Speed","Fast UI, no round trip","Needs request/response"],["Security","Code visible to user","Code hidden"],["DB access","No (direct)","Yes"],["Use","Validation, animation","Login, DB, business logic"]],f:["Client-Side","Browser","HTML + CSS + JS","UI, validation","|  vs  |","Server-Side","Web server","C# / PHP","DB, security"],m:"Client = Customer’s side (browser). Server = Serves data.",x:[["Introduction","Web applications use scripts that run either in the user’s browser or on the web server. Choosing correctly affects speed, security and functionality."],["Client-Side Scripting","Code is sent with the page and executed by the browser. Languages: HTML, CSS, JavaScript. Used for form validation, animations, menus and instant feedback without contacting the server. Advantages: fast response, less server load. Disadvantages: code is visible to the user, no direct database access, depends on browser support."],["Server-Side Scripting","Code runs on the web server, which processes the request, talks to the database and returns plain HTML. Languages: C# (ASP.NET), PHP, Java, Python. Advantages: code is hidden and secure, database access, works on any browser. Disadvantages: every action needs a request–response trip, so it is slower and loads the server."],["Differences","Write the table: runs on, languages, speed, security, database access, typical use."],["Conclusion","Modern sites use both: client-side for a smooth interface and server-side for secure data processing."]]},
+{q:"Explain Client-Side and Server-Side Scripting with a Diagram",t:"Browser sends a request; server runs code and returns HTML; browser then runs JS on it.",f:["Browser (Client)","HTTP Request","Web Server","Run C# / DB query","HTML Response","Browser renders + JS runs"],p:["Client-side: HTML, CSS, JavaScript executes in browser","Server-side: ASP.NET code executes on IIS/Kestrel","User never sees server code, only output"],x:[["Introduction","Client-side and server-side scripting are the two halves of a web application. Together they handle the user interface and the data processing."],["Working (follow the diagram)","1) The user types a URL or submits a form in the browser. 2) The browser sends an HTTP request to the web server. 3) The server runs the server-side code (ASP.NET/C#), queries the database if needed and builds an HTML page. 4) The server sends the HTML response back. 5) The browser renders the page and runs client-side JavaScript on it."],["Client-Side Scripting","Executes in the browser. Handles validation, animation and interactivity without a server round trip. Code is visible to the user."],["Server-Side Scripting","Executes on the server (IIS/Kestrel). Handles business logic, authentication and database operations. Only the output is visible; source code stays secret."],["Conclusion","Client-side improves user experience; server-side provides security and data handling. Both are needed for a complete web application."]]},
+{q:"Architecture and Components of .NET Framework",t:".NET Framework = CLR + Class Library (FCL), sitting on the OS, supporting many languages.",l:["Applications: Web Forms · WinForms · WPF · Console","ASP.NET · ADO.NET · WCF","Base Class Library (FCL)","CLR (CLR runs, JIT, GC, security)","CTS + CLS (type/language rules)","Operating System"],p:["CLR: runtime, memory management, garbage collection, security","FCL/BCL: ready-made classes (System.IO, System.Data…)","CTS: common data types · CLS: language rules","Languages: C#, VB.NET, F# all compile to MSIL"],m:"CLR runs it, FCL gives tools.",x:[["Introduction",".NET Framework is a software platform from Microsoft for building and running Windows and web applications. Programs in many languages compile to a common intermediate code and run under one runtime."],["1. Common Language Runtime (CLR)","The execution engine. It loads assemblies, JIT-compiles MSIL to native code, manages memory with garbage collection, handles exceptions, thread management and security."],["2. Framework Class Library (FCL/BCL)","A large collection of reusable classes and namespaces such as System, System.IO, System.Data and System.Web. It saves development time."],["3. CTS and CLS","Common Type System defines data types shared by all .NET languages. Common Language Specification defines the rules every language must follow so that languages can interoperate."],["4. Languages and Application Types","C#, VB.NET and F# compile to MSIL. Application layers include ASP.NET (web), ADO.NET (data), WinForms/WPF (desktop), WCF (services)."],["5. Operating System Layer","The framework sits on the OS, which talks to hardware. See the layered diagram above."],["Conclusion","The architecture gives language independence, automatic memory management and a rich library, making development faster and safer."]]},
+{q:"Applications and Features of ASP.NET",t:"ASP.NET is Microsoft’s framework for building dynamic web apps, APIs and services.",p:["Applications: websites, e-commerce, web APIs, enterprise portals, PWAs","Compiled code → fast performance","Multi-language support (C#, VB)","State management: Session, Cookies, ViewState","Built-in security: authentication/authorization","Caching, master pages, validation controls","Easy deployment, rich tool support (Visual Studio)","Separation of code and design (code-behind)"]},
+{q:"CLR, MSIL and JIT with Relationship to OS and Hardware",t:"Source → MSIL (portable) → JIT converts to machine code → runs on hardware via OS.",f:["C# Source","Compiler","MSIL + Metadata","CLR loads","JIT Compiler","Native Machine Code","OS → Hardware"],p:["CLR: runtime engine; manages memory, security, exceptions","MSIL: CPU-independent intermediate code (also called IL/CIL)","JIT: compiles MSIL to native code at runtime, per method, only when called","Result: same code runs on any OS/hardware with a CLR"],m:"Compile → IL → JIT → Native."},
+{q:"What is an Assembly? Explain its Types",t:"Assembly = compiled unit of deployment (.dll or .exe) holding MSIL, metadata and resources.",tb:[["Type","Meaning"],["Private","Used by one app, stored in app folder"],["Shared","Used by many apps, stored in GAC, needs strong name"],["Satellite","Holds only resources (language/culture)"],["Static","Created at compile time, stored on disk"],["Dynamic","Created at runtime in memory (Reflection.Emit)"]]},
+{q:"Explain GAC (Global Assembly Cache)",t:"GAC is a machine-wide store for shared assemblies so many apps can use one copy.",p:["Location: C:\\Windows\\Microsoft.NET\\assembly","Assemblies need a strong name (name + version + culture + public key token)","Supports side-by-side versioning (avoids DLL Hell)","Add with gacutil -i MyLib.dll","Benefits: one copy, security, versioning · Drawback: admin rights needed"]},
+{q:"Components of an Assembly",t:"Four parts: Manifest, Metadata, MSIL code, Resources.",l:["Manifest – name, version, culture, references","Type Metadata – classes, methods, members","MSIL Code – compiled instructions","Resources – images, strings, files"],m:"M-M-M-R (Manifest, Metadata, MSIL, Resources)."},
+{q:".NET Framework vs .NET Core, and Benefits of .NET Core",t:".NET Core is the modern, open-source, cross-platform, faster successor.",tb:[["Point","Framework","Core"],["Platform","Windows only","Windows, Linux, macOS"],["Source","Mostly closed","Open source"],["Performance","Good","Faster, lightweight"],["Deployment","Machine-wide install","Side-by-side, self-contained"],["Cloud/Docker","Limited","Excellent"],["Web Forms","Supported","Not supported"]],p:["Benefits: cross-platform, high performance, modular (NuGet), microservices & Docker ready, free and open-source"]},
+{q:"C#: Area of Circle, Rectangle, Square and Factorial (Recursion)",t:"Use formulas πr², l×b, s×s; factorial calls itself until n = 1.",c:`double circle = Math.PI * r * r;
+double rect   = l * b;
+double square = s * s;
+
+static int Fact(int n)
+{
+    if (n <= 1) return 1;     // base case
+    return n * Fact(n - 1);   // recursive call
+}
+// Fact(5) = 120`},
+{q:"C#: Leap Year, Positive Number, Voting, Grade, Arithmetic",t:"All use if–else or switch on user input.",c:`// Leap year
+if ((y%4==0 && y%100!=0) || y%400==0) Console.WriteLine("Leap");
+else Console.WriteLine("Not leap");
+
+// Positive / voting
+if (n > 0) Console.WriteLine("Positive");
+if (age >= 18) Console.WriteLine("Can vote");
+
+// Grade
+if (m >= 75) g = "A"; else if (m >= 60) g = "B";
+else if (m >= 40) g = "C"; else g = "Fail";
+
+// Arithmetic
+Console.WriteLine(a+b); Console.WriteLine(a-b);
+Console.WriteLine(a*b); Console.WriteLine(a/b);`},
+{q:"OOPs and its Four Pillars with Real-Life Examples",t:"OOP builds programs from objects. Four pillars: Encapsulation, Abstraction, Inheritance, Polymorphism.",tb:[["Pillar","Meaning","Real life"],["Encapsulation","Data + methods wrapped, hide data","Medicine capsule / ATM"],["Abstraction","Show only essentials","Driving a car without engine details"],["Inheritance","Child reuses parent","Child inherits parents’ traits"],["Polymorphism","One name, many forms","Person acts as student, son, friend"]],m:"A PIE: Abstraction, Polymorphism, Inheritance, Encapsulation."},
+{q:"Inheritance and its Types with One Code Example",t:"Inheritance lets a child class reuse members of a parent class (: symbol).",f:["Single: A→B","Multilevel: A→B→C","Hierarchical: A→B, A→C","Multiple: via interfaces","Hybrid: mix"],c:`class Animal { public void Eat() => Console.WriteLine("Eating"); }
+class Dog : Animal { public void Bark() => Console.WriteLine("Barking"); }
+// new Dog().Eat();  new Dog().Bark();`},
+{q:"Single-Level Inheritance with an Example",t:"One child class inherits from exactly one parent class.",f:["Parent (Vehicle)","inherits →","Child (Car)"],c:`class Vehicle { public void Start() => Console.WriteLine("Started"); }
+class Car : Vehicle { public void Drive() => Console.WriteLine("Driving"); }
+Car c = new Car(); c.Start(); c.Drive();`},
+{q:"Multiple Inheritance and Why C# Classes Do Not Support It",t:"One class with two parent classes. C# blocks it to avoid the Diamond Problem.",p:["Diamond problem: B and C both inherit A and override a method; D inherits B and C → which version does D use? Ambiguity","Solution in C#: use interfaces (a class can implement many)"],c:`interface IA { void Show(); }
+interface IB { void Print(); }
+class D : IA, IB {
+    public void Show() {}
+    public void Print() {}
+}`},
+{q:"Encapsulation and Polymorphism",t:"Encapsulation hides data behind access modifiers; Polymorphism = same method, different behaviour.",p:["Encapsulation: private fields + public properties","Compile-time polymorphism: method overloading, operator overloading","Run-time polymorphism: virtual + override"],c:`class Acc { private int bal; public int Bal { get => bal; set { if (value>=0) bal=value; } } }
+
+class Shape { public virtual void Draw() => Console.WriteLine("Shape"); }
+class Circle : Shape { public override void Draw() => Console.WriteLine("Circle"); }`},
+{q:"C# Program to Add Two Floating-Point Numbers",t:"Read as float/double, use + operator, print.",c:`float a = 2.5f, b = 3.7f;
+float sum = a + b;
+Console.WriteLine("Sum = " + sum);   // 6.2`}
+];
+let done={};try{done=JSON.parse(localStorage.getItem("a1")||"{}")}catch(e){}
+let cur=0,tab=0;const $=id=>document.getElementById(id),c=$("c");
+const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+$("j").innerHTML=D.map((d,i)=>`<option value="${i}">${i+1}. ${esc(d.q).slice(0,48)}</option>`).join("");
+function body(d){
+ const hasV=d.f||d.l||d.tb||d.c,tabs=["⚡ Quick"];if(hasV)tabs.push("📊 Visual");if(d.x)tabs.push("📝 Full 5-mark");
+ let h=`<div class="qh"><span class="n">${cur+1}</span><span>${esc(d.q)}</span></div><div class="tabs">`+tabs.map((t,i)=>`<button data-t="${i}" class="${i==tab?"on":""}">${t}</button>`).join("")+`</div>`;
+ const name=tabs[tab];
+ if(name.startsWith("⚡")){h+=`<div class="tl">⚡ ${esc(d.t)}</div>`;if(d.p)h+=`<ul>`+d.p.map(x=>`<li>${esc(x)}</li>`).join("")+`</ul>`;if(d.m)h+=`<div class="mn">🧠 ${esc(d.m)}</div>`}
+ else if(name.startsWith("📊")){
+  if(d.f)h+=`<div class="fl">`+d.f.map((x,k)=>(k?`<b style="--k:${k}">➜</b>`:"")+`<span style="--k:${k}">${esc(x)}</span>`).join("")+`</div>`;
+  if(d.l)h+=`<div class="ly">`+d.l.map((x,k)=>`<div style="--k:${k};width:${100-k*5}%;background:hsl(${255+k*20},75%,58%)">${esc(x)}</div>`).join("")+`</div>`;
+  if(d.tb)h+=`<table>`+d.tb.map((r,k)=>"<tr>"+r.map(v=>k?`<td>${esc(v)}</td>`:`<th>${esc(v)}</th>`).join("")+"</tr>").join("")+`</table>`;
+  if(d.c)h+=`<pre>${esc(d.c)}</pre>`}
+ else h+=`<div class="fa">`+d.x.map(s=>`<h4>${esc(s[0])}</h4><p>${esc(s[1])}</p>`).join("")+`<div class="sub" style="margin-top:10px">Draw the diagram + table from the Visual tab.</div></div>`;
+ return h}
+const BG=[["Browser","HTML+JS","Request","Server","Database"],["Browser","Request","Server","C# + DB","HTML"],["Language","Compiler","MSIL","CLR","OS"],["Client","ASP.NET","Logic","Database","Response"],["C# Code","MSIL","CLR","JIT","Native"],["Assembly","Private","Shared","Satellite","Dynamic"],["Strong Name","Install","GAC","Shared","Apps"],["Assembly","Manifest","Metadata","MSIL","Resources"],[".NET FW","Windows","Core","Cross-OS","Fast"],["Input","Formula","Compute","Recursion","Output"],["Input","Check","if / else","Result","Print"],["OOP","Encaps.","Abstract.","Inherit.","Polymorph."],["Parent","Single","Multilevel","Hierarchy","Hybrid"],["Vehicle","inherits","Car","Start()","Drive()"],["Class A","Class B","Class C","Diamond X","Interface"],["Private","Property","Public","Override","Behaviour"],["Float a","Float b","a + b","Sum","Print"]];
+const E=[
+["Software that shows web pages (Chrome)|Sends the HTTP request, renders HTML and runs JavaScript","Client-side code downloaded with the page|Runs inside the browser: validation, animation, no server trip","HTTP message to the server|Carries URL, method (GET/POST) and form data","Machine running ASP.NET / IIS|Executes C# code, applies logic and builds the HTML","Stores permanent data|Server queries it and merges the result into the reply"],
+["The user’s client|User types a URL or submits a form","HTTP request|Travels over the internet to the web server","Web server (IIS/Kestrel)|Receives the request and starts server-side code","Server-side logic|Runs C# and queries the database for data","Response page|Plain HTML sent back; browser renders it and runs JS"],
+["C#, VB.NET, F#|Any language that follows CLS can be used","Language compiler|Converts source code into MSIL plus metadata","Intermediate Language|CPU-independent code stored in the assembly","Common Language Runtime|Loads code, JIT compiles, garbage collection, security","Operating system|CLR asks the OS for memory and hardware access"],
+["Browser or app|Sends a request to the web application","Web framework|Receives the request and picks the page or controller","Business rules|Validation, sessions, security and caching are applied","Data store|Accessed through ADO.NET or Entity Framework","Output|HTML or JSON returned to the client"],
+["Source written by the developer|Compiled by the C# compiler","Portable IL code|Stored in .exe/.dll, same on any CPU","Runtime engine|Loads the assembly, checks security, manages memory","Just-In-Time compiler|Converts each method to native code when first called","Machine code|Runs on the CPU through the OS and hardware"],
+["Unit of deployment (.dll/.exe)|Contains MSIL, metadata and resources","Used by one application|Kept in that application’s folder","Used by many applications|Stored in the GAC and needs a strong name","Resource-only assembly|Holds language-specific strings and images","Built at runtime|Created in memory using Reflection.Emit"],
+["Unique identity|Name + version + culture + public key token","Adding to the GAC|Use gacutil -i MyLib.dll (needs admin rights)","Machine-wide cache|Keeps shared assemblies in one place","One copy only|Saves space and allows side-by-side versions","Many applications|All of them load the same DLL from the GAC"],
+["Compiled package|Made of four parts","Assembly details|Name, version, culture, files and references","Type information|Describes classes, methods and members","Compiled code|Instructions the CLR JIT-compiles","Extra files|Images, strings and data used by the code"],
+["Old Windows-only platform|Installed machine-wide, supports Web Forms","Limited to Windows|Cannot run on Linux or macOS","Modern open-source platform|Rebuilt to be modular and lightweight","Runs anywhere|Windows, Linux, macOS and Docker","High performance|Optimised runtime, ideal for cloud and microservices"],
+["Get values|Read radius, length or number from the user","Pick the formula|π×r², l×b, s×s","Calculate|Store the result in a variable","Function calls itself|Fact(n) = n × Fact(n-1) until n ≤ 1","Display result|Console.WriteLine prints the answer"],
+["Read value|Year, age, marks or numbers","Condition|Test with operators like >=, ==, %","Decision|Choose the branch that matches","Outcome|Leap/Not, Eligible/Not, grade or answer","Output|Console.WriteLine shows the result"],
+["Programming with objects|Data and behaviour grouped in classes","Wrap and hide data|Private fields, public methods (ATM)","Show only essentials|Driving a car without engine details","Reuse parent features|Child class gets the parent’s members","One name, many forms|Overloading and overriding"],
+["Base class|Gives members to its children","A → B|One child inherits one parent","A → B → C|A chain of inheritance","A → B and A → C|Many children, one parent","Mix of types|In C# achieved using interfaces"],
+["Parent class|Defines Start()","The colon : symbol|class Car : Vehicle","Child class|Gets Start() and adds its own methods","Inherited method|Car object can call it directly","Own method|Defined only in Car"],
+["Base class|Has a method","Child 1 of A|Overrides the method","Child 2 of A|Overrides the method","Ambiguity problem|D inherits B and C: which method? C# blocks it","The C# solution|A class can implement many interfaces"],
+["Hidden field|Cannot be accessed outside the class","Controlled access|get/set can validate values","Visible members|Accessible from other classes","Runtime polymorphism|Child changes a virtual method","Different result|Same call behaves differently per object"],
+["First number|float a = 2.5f","Second number|float b = 3.7f","Addition operator|Adds both values","Stored result|float sum = 6.2","Output|Console.WriteLine shows the sum"]];
+let ai=0,pl=0;const stop=()=>{clearInterval(pl);pl=0};
+function wf(){const [w,h]=E[cur][ai].split("|");$("ws").innerHTML=BG[cur].map((x,k)=>(k?'<span class="ar">➜</span>':'')+`<button class="st${k==ai?" on":k<ai?" vis":""}" data-k="${k}">${k+1}. ${esc(x)}</button>`).join("");
+const wi=$("wi");wi.innerHTML=`<b>WHAT IS IT</b>${esc(w)}<b>HOW IT WORKS</b>${esc(h)}`;wi.style.animation="none";wi.getBoundingClientRect();wi.style.animation="";$("wp").textContent=pl?"⏸ PAUSE":"▶ PLAY"}
+$("ws").onclick=e=>{const b=e.target.closest("[data-k]");if(b){stop();ai=+b.dataset.k;wf()}};
+$("wp").onclick=()=>{if(pl)stop();else{if(ai>=4)ai=0;pl=setInterval(()=>{if(ai<4)ai++;else stop();wf()},2600)}wf()};
+function setBg(){const L=BG[cur];document.querySelectorAll(".bn").forEach((e,k)=>{e.textContent=L[k];e.style.animation="none";e.getBoundingClientRect();e.style.animation=""});$("bcap").textContent="WORKFLOW · Q"+(cur+1)+" · "+D[cur].q.toUpperCase().slice(0,38)}
+function fill(){setBg();wf();c.innerHTML=body(D[cur]);$("j").value=cur;$("rv").classList.toggle("on",!!done[cur]);$("rv").textContent=done[cur]?"✓ Revised":"Mark revised";
+ $("pv").disabled=cur==0;$("nx").disabled=cur==D.length-1;
+ const n=Object.keys(done).filter(k=>done[k]).length;$("pb").style.width=(cur+1)/D.length*100+"%";$("pt").textContent=`Question ${cur+1} of ${D.length} · ${n} revised`}
+function go(i,force){if(i<0||i>=D.length||(i==cur&&!force))return;const dir=i>cur?1:-1;c.className="card "+(dir>0?"oL":"oR");
+ setTimeout(()=>{cur=i;tab=0;stop();ai=0;fill();c.className="card "+(dir>0?"iR":"iL");scrollTo({top:0,behavior:"smooth"})},270)}
+c.onclick=e=>{const b=e.target.closest("[data-t]");if(b){tab=+b.dataset.t;fill()}};
+$("nx").onclick=()=>go(cur+1);$("pv").onclick=()=>go(cur-1);$("j").onchange=e=>go(+e.target.value);
+$("rv").onclick=()=>{done[cur]=!done[cur];try{localStorage.setItem("a1",JSON.stringify(done))}catch(e){}fill()};
+addEventListener("keydown",e=>{if(e.key=="ArrowRight")go(cur+1);if(e.key=="ArrowLeft")go(cur-1)});
+let sx=0;addEventListener("touchstart",e=>sx=e.touches[0].clientX,{passive:true});addEventListener("touchend",e=>{const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>80)go(cur+(d<0?1:-1))});
+const tl=$("tl");tl.parentElement.onpointermove=e=>{if(e.pointerType=="touch")return;const r=tl.getBoundingClientRect();tl.style.setProperty("--ry",((e.clientX-r.left)/r.width-.5)*8+"deg");tl.style.setProperty("--rx",-((e.clientY-r.top)/r.height-.5)*8+"deg")};
+tl.parentElement.onpointerleave=()=>{tl.style.setProperty("--rx","0deg");tl.style.setProperty("--ry","0deg")};
+fill();
+</script></body></html>
